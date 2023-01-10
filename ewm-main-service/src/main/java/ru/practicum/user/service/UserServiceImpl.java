@@ -1,4 +1,4 @@
-﻿package ru.practicum.user.service;
+package ru.practicum.user.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,12 @@ import ru.practicum.user.mapper.UserMapper;
 import ru.practicum.user.model.User;
 import ru.practicum.user.repository.UserRepository;
 
-
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -29,14 +27,13 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-
     @Override
     public UserDto createUser(User user) {
         User newUser;
         try {
             newUser = userRepository.save(user);
         } catch (Exception e) {
-            throw new AnybodyUseEmailOrNameException("имя или email");
+            throw new AnybodyUseEmailOrNameException(" имя или email");
         }
         log.info("createUser user: {}", user);
         return UserMapper.toUserDto(newUser);
@@ -54,12 +51,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Collection<UserDto> getAllUsers(Set<Integer> ids, Integer from, Integer size) {
-        log.info("Get all users with param ids: {}, from: {}, size: {};",ids,from,size );
-        Pageable pageable = PageRequest.of(from/size, size);
-       return userRepository.findAllById(ids, pageable).stream()
-               .map(UserMapper::toUserDto)
-               .collect(Collectors.toList());
+    public Collection<UserDto> getAllUsers(Set<Long> ids, Integer from, Integer size) {
+        log.info("Get all users with param ids: {}, from: {}, size: {};", ids, from, size);
+        Pageable pageable = PageRequest.of(from / size, size);
+        return userRepository.findAllByIdIn(ids, pageable).stream()
+                .map(UserMapper::toUserDto)
+                .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public User getById(long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User with id " + userId + " not found"));
     }
 }

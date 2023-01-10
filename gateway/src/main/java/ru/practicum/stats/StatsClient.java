@@ -13,6 +13,7 @@ import ru.practicum.stats.dto.HitDto;
 
 import java.util.Collection;
 import java.util.Map;
+
 @Slf4j
 @Service
 public class StatsClient extends BaseClient {
@@ -21,14 +22,14 @@ public class StatsClient extends BaseClient {
     public StatsClient(@Value("${stat-service-server.url}") String serverUrl, RestTemplateBuilder builder) {
         super(
                 builder
-                        .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl ))
+                        .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
                         .requestFactory(HttpComponentsClientHttpRequestFactory::new)
                         .build()
         );
     }
 
     public ResponseEntity<Object> addStats(HitDto hit) {
-        log.info("Send hit with param app: {}, ip: {}, uri: {};", hit.getApp(), hit.getIp(),hit.getUri());
+        log.info("Send hit with param app: {}, ip: {}, uri: {};", hit.getApp(), hit.getIp(), hit.getUri());
         return post("/hit", hit);
 
     }

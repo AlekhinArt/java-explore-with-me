@@ -1,6 +1,5 @@
-﻿package ru.practicum.user.service;
+package ru.practicum.user.service;
 
-import org.springframework.http.ResponseEntity;
 import ru.practicum.user.dto.UserDto;
 import ru.practicum.user.model.User;
 
@@ -12,5 +11,7 @@ public interface UserService {
 
     void deleteUser(long id);
 
-    Collection<UserDto> getAllUsers(Set<Integer> ids, Integer from, Integer size);
+    Collection<UserDto> getAllUsers(Set<Long> ids, Integer from, Integer size);
+
+    User getById(long userId);
 }

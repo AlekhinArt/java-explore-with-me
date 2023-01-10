@@ -37,9 +37,10 @@ public class UserClient extends BaseClient {
 
     }
 
-    public ResponseEntity<Object> getAllUsers(Set<Integer> ids, Integer from, Integer size) {
+    public ResponseEntity<Object> getAllUsers(Set<String> ids, Integer from, Integer size) {
+        String idsStr = String.join(", ", ids);
         Map<String, Object> parameters = Map.of(
-                "ids", ids,
+                "ids", idsStr,
                 "from", from,
                 "size", size
         );

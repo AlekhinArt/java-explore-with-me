@@ -1,4 +1,4 @@
-﻿package ru.practicum.publicApi.compilation;
+package ru.practicum.publicApi.compilation;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

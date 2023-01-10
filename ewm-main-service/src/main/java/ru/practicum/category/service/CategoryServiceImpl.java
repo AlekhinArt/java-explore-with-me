@@ -1,7 +1,7 @@
-﻿package ru.practicum.category.service;
+package ru.practicum.category.service;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,18 @@ import ru.practicum.exceptions.NotFoundException;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+
 @Slf4j
 @Service
-@AllArgsConstructor
+
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+
+    @Autowired
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     @Override
     public CategoryDto getCategory(Long catId) {
@@ -30,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Collection<CategoryDto> getCategories(Integer from, Integer size) {
-        Pageable pageable = PageRequest.of(from/size, size);
+        Pageable pageable = PageRequest.of(from / size, size);
         return categoryRepository.findAll(pageable).stream()
                 .map(CategoryMapper::toCategoryDto)
                 .collect(Collectors.toList());

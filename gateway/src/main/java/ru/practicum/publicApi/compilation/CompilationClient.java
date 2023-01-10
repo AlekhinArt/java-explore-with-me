@@ -1,4 +1,4 @@
-﻿package ru.practicum.publicApi.compilation;
+package ru.practicum.publicApi.compilation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +22,7 @@ public class CompilationClient extends BaseClient {
                         .build()
         );
     }
+
     public ResponseEntity<Object> getCompilations(Boolean pinned, Integer from, Integer size) {
         Map<String, Object> parameters = Map.of(
                 "pinned", pinned,

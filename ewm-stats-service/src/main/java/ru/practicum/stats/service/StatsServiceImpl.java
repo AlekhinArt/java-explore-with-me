@@ -1,6 +1,7 @@
 package ru.practicum.stats.service;
 
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.practicum.stats.dto.StatsDto;
 import ru.practicum.stats.model.Hit;
@@ -10,12 +11,19 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.Collection;
 
 @Service
-@RequiredArgsConstructor
+@Slf4j
 public class StatsServiceImpl implements StatsService {
     private final StatsRepository statsRepository;
+
+    @Autowired
+    public StatsServiceImpl(StatsRepository statsRepository) {
+        this.statsRepository = statsRepository;
+    }
 
     @Override
     public void addStats(Hit hit) {
@@ -25,6 +33,7 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public Collection<StatsDto> getStats(String start, String end, Collection<String> uris, Boolean unique) {
+        log.info("get stats start {}, end: {}, uris {}, unique {}", start, end, uris, unique);
         if (unique) {
             if (uris != null && !uris.isEmpty()) {
                 return statsRepository.getAllWithUrisAndUnique(decoderDate(start), decoderDate(end), uris);
@@ -38,8 +47,14 @@ public class StatsServiceImpl implements StatsService {
     }
 
     private LocalDateTime decoderDate(String time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return LocalDateTime.parse(URLDecoder.decode(time, StandardCharsets.UTF_8), formatter);
+        DateTimeFormatter dateTimeFormatter = new DateTimeFormatterBuilder()
+                .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+                .optionalStart()
+                .appendFraction(ChronoField.MICRO_OF_SECOND, 1, 9, true)
+                .optionalEnd()
+                .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                .toFormatter();
+        return LocalDateTime.parse(URLDecoder.decode(time, StandardCharsets.UTF_8), dateTimeFormatter);
 
     }
 }

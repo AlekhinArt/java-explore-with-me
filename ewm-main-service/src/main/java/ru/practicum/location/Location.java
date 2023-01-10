@@ -1,21 +1,21 @@
-﻿package ru.practicum.location;
+package ru.practicum.location;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
-@Table (name = "locations")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "locations")
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id")
-    private Long id;
-    @Column
-    private String name;
+    private long id;
     @Column
     private double lat;
     @Column

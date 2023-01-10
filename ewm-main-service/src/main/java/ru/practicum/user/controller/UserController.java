@@ -1,4 +1,4 @@
-﻿package ru.practicum.user.controller;
+package ru.practicum.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public UserDto createUser( @RequestBody User user) {
+    public UserDto createUser(@RequestBody User user) {
         log.info("createUser user : {}", user);
         return userService.createUser(user);
     }
@@ -31,13 +31,12 @@ public class UserController {
     }
 
     @GetMapping
-    public Collection<UserDto> getAllUsers(@RequestParam(defaultValue = "", required = false) Set<Integer> ids,
+    public Collection<UserDto> getAllUsers(@RequestParam(name = "ids", required = false) Set<Long> ids,
                                            @RequestParam(name = "from", defaultValue = "0") Integer from,
                                            @RequestParam(name = "size", defaultValue = "10") Integer size) {
         log.info("getAllUsers with param ids: {}, from: {}, size: {}", ids, from, size);
         return userService.getAllUsers(ids, from, size);
     }
-
 
 
 }

@@ -1,20 +1,19 @@
-﻿package ru.practicum.event.model;
+package ru.practicum.event.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.practicum.category.model.Category;
 import ru.practicum.location.Location;
 import ru.practicum.user.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "events")
 public class Event {
     @Id
@@ -26,23 +25,30 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @Column
+    @Column(name = "confirmed_requests")
     private int confirmedRequests;
+    @Column(name = "created_on")
     private LocalDateTime createdOn;
     private String description;
+    @Column(name = "event_date")
     private LocalDateTime eventDate;
     @ManyToOne
     @JoinColumn(name = "initiator")
     private User initiator;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location")
     private Location location;
     private boolean paid;
-    private int participantLimit;
+    @Column(name = "participant_limit")
+    private long participantLimit;
+    @Column(name = "published_on")
     private LocalDateTime publishedOn;
+    @Column(name = "request_moderation")
     private boolean requestModeration;
     @Enumerated(EnumType.STRING)
     private State state;
     private String title;
+    @Transient
+    private long views;
 
 }

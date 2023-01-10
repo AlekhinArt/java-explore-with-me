@@ -1,9 +1,6 @@
-﻿package ru.practicum.request.model;
+package ru.practicum.request.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,17 +10,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "participation_requests")
 public class ParticipationRequests {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "request_id")
-        private Long id;
-        private LocalDateTime created;
-        @Column (name = "event_id")
-        private Long event;
-        private long requester;
-        @Enumerated(EnumType.STRING)
-        private StateRequest status;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "request_id")
+    private Long id;
+    private LocalDateTime created;
+    @Column(name = "event_id")
+    private Long event;
+    private long requester;
+    @Enumerated(EnumType.STRING)
+    private StateRequest status;
 
 }

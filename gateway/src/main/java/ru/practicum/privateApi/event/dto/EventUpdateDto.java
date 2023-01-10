@@ -1,15 +1,14 @@
 package ru.practicum.privateApi.event.dto;
 
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
-@Setter
+@AllArgsConstructor
 @Getter
-@RequiredArgsConstructor
+@Setter
+@NoArgsConstructor
 public class EventUpdateDto {
     @NotNull
     private String annotation;

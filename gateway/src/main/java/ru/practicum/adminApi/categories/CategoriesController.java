@@ -18,7 +18,7 @@ import javax.validation.constraints.Positive;
 @RequiredArgsConstructor
 @Validated
 public class CategoriesController {
-    private final CategoriesClient categoriesClient;
+    private final CategoriesClientAdmin categoriesClient;
 
     @PatchMapping
     public ResponseEntity<Object> changeCategory(@Validated(Update.class) @RequestBody Categories categories) {
@@ -37,6 +37,5 @@ public class CategoriesController {
         log.info("Delete category catId {}", catId);
         return categoriesClient.deleteCategory(catId);
     }
-
 
 }

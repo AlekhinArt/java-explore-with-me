@@ -1,9 +1,7 @@
-﻿package ru.practicum.category.controller;
+package ru.practicum.category.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.model.Category;
@@ -15,7 +13,6 @@ import java.util.Collection;
 @RestController
 @RequestMapping
 @RequiredArgsConstructor
-@Validated
 public class CategoryController {
     private final CategoryService categoryService;
 
@@ -38,8 +35,8 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public Collection <CategoryDto> getCategories(@RequestParam(name = "from", defaultValue = "0") Integer from,
-                                    @RequestParam(name = "size", defaultValue = "10") Integer size) {
+    public Collection<CategoryDto> getCategories(@RequestParam(name = "from", defaultValue = "0") Integer from,
+                                                 @RequestParam(name = "size", defaultValue = "10") Integer size) {
         log.info("Get categories with params from: {}, size: {};", from, size);
         return categoryService.getCategories(from, size);
     }

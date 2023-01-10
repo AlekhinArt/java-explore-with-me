@@ -1,4 +1,4 @@
-﻿package ru.practicum.category.service;
+package ru.practicum.category.service;
 
 import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.model.Category;

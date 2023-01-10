@@ -3,13 +3,60 @@ services:
   stats-server:
     ports:
       - "9090:9090"
-
+    build: ./ewm-stats-service/
+    container_name: :ewm_stats
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/stats
+      - POSTGRES_USER = stats
+      - POSTGRES_PASSWORD = stats
+    depends_on:
+      - stats-db
+      - gateway
   stats-db:
     image: postgres:14-alpine
+    volumes:
+      - /var/lib/postgresql/data/
+    container_name: db_stats
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=stats
+      - POSTGRES_USER=stats
+      - POSTGRES_PASSWORD=stats
 
   ewm-service:
     ports:
-      - "8080:8080"
+      - "7070:7070"
+    build: ./ewm-main-service/
+    container_name: ewm_main
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm_main
+      - POSTGRES_USER = ewm_main
+      - POSTGRES_PASSWORD = ewm_main
+    depends_on:
+      - ewm-db
+      - gateway
 
   ewm-db:
     image: postgres:14-alpine
+    volumes:
+      - /var/lib/postgresql/data/
+    container_name: db_ewm_main
+    ports:
+      - "6540:5432"
+    environment:
+      - POSTGRES_DB=ewm_main
+      - POSTGRES_USER=ewm_main
+      - POSTGRES_PASSWORD=ewm_main
+
+  gateway:
+    build: ./gateway/
+    container_name: gateway_ewm
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ewm-service
+      - stats-server
+    environment:
+      - MAIN_SERVICE_SERVER_URL=http://localhost:7070
+      - STAT_SERVICE_SERVER_URL=http://localhost:9090
