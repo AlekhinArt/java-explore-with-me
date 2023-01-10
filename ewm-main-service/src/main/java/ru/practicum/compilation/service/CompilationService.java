@@ -10,7 +10,7 @@ public interface CompilationService {
 
     CompilationDto getCompilation(Long compId);
 
-    CompilationDto addCompilation(NewCompilationDto Compilation);
+    CompilationDto addCompilation(NewCompilationDto сompilation);
 
     void deleteCompilation(Long compId);
 

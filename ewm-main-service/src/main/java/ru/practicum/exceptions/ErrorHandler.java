@@ -30,7 +30,7 @@ public class ErrorHandler {
     public MainServiceError notFoundException(final NotFoundException e) {
         log.info("NotFoundException {}", e.getMessage());
         return MainServiceError.builder()
-                .message("NotFoundException "+e.getMessage())
+                .message("NotFoundException " + e.getMessage())
                 .status("FORBIDDEN")
                 .reason("For the requested operation the conditions are not met.")
                 .timestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))

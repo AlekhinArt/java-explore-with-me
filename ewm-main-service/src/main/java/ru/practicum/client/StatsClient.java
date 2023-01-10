@@ -12,12 +12,12 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 import java.util.Map;
 
 @Service
-public class StatsClient extends BaseClient{
+public class StatsClient extends BaseClient {
 
     public StatsClient(@Value("http://localhost:8080") String serverUrl, RestTemplateBuilder builder) {
         super(
                 builder
-                        .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl ))
+                        .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
                         .requestFactory(HttpComponentsClientHttpRequestFactory::new)
                         .build()
         );

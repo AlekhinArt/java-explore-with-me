@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.practicum.category.model.Category;
 import ru.practicum.user.dto.UserShortDto;
+
 @Builder
 @Setter
 @Getter

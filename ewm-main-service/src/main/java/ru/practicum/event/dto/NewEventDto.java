@@ -3,6 +3,7 @@ package ru.practicum.event.dto;
 import lombok.Builder;
 import lombok.Getter;
 import ru.practicum.location.LocationDto;
+
 @Builder
 @Getter
 public class NewEventDto {

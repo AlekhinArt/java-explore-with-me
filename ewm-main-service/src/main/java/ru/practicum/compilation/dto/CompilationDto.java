@@ -8,6 +8,7 @@ import ru.practicum.event.model.Event;
 
 
 import java.util.List;
+
 @AllArgsConstructor
 @Builder
 @Setter
@@ -15,10 +16,7 @@ import java.util.List;
 public class CompilationDto {
 
     private Long id;
-
     private boolean pinned;
-
     private String title;
-
     private List<Event> events;
 }
