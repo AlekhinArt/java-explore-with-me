@@ -7,8 +7,8 @@ services:
     container_name: :ewm_stats
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/stats
-      - POSTGRES_USER = stats
-      - POSTGRES_PASSWORD = stats
+      - POSTGRES_USER=stats
+      - POSTGRES_PASSWORD=stats
     depends_on:
       - stats-db
       - gateway
@@ -31,8 +31,8 @@ services:
     container_name: ewm_main
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm_main
-      - POSTGRES_USER = ewm_main
-      - POSTGRES_PASSWORD = ewm_main
+      - POSTGRES_USER=ewm_main
+      - POSTGRES_PASSWORD=ewm_main
     depends_on:
       - ewm-db
       - gateway
