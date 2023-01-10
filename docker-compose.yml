@@ -1,4 +1,4 @@
-version: '3.1'
+version: '4.14.1'
 services:
   stats-server:
     ports:
@@ -31,6 +31,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm_main
       - POSTGRES_USER=ewm_main
       - POSTGRES_PASSWORD=ewm_main
+      - GATEWAY_SERVER_URL=http://server:8080
     depends_on:
       - ewm-db
   ewm-db:
@@ -54,5 +55,5 @@ services:
       - ewm-service
       - stats-server
     environment:
-      - MAIN_SERVICE_SERVER_URL=http://localhost:7070
-      - STAT_SERVICE_SERVER_URL=http://localhost:9090
+      - MAIN_SERVICE_SERVER_URL=http://server:7070
+      - STAT_SERVICE_SERVER_URL=http://server:9090
