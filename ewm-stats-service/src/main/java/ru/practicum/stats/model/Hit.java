@@ -11,19 +11,19 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "hit")
+@Table(name = "HIT")
 public class Hit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hit_id")
     private Long id;
-    @Column
+    @Column(name = "app")
     private String app;
-    @Column
+    @Column(name = "uri")
     private String uri;
-    @Column
+    @Column(name = "ip")
     private String ip;
-    @Column
+    @Column(name = "time")
     private LocalDateTime time;
 
 

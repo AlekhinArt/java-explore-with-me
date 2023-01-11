@@ -3,7 +3,9 @@ package ru.practicum.stats.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.practicum.stats.dto.HitDto;
 import ru.practicum.stats.dto.StatsDto;
+import ru.practicum.stats.mapper.StatsMapper;
 import ru.practicum.stats.model.Hit;
 import ru.practicum.stats.repository.StatsRepository;
 
@@ -26,7 +28,8 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public void addStats(Hit hit) {
+    public void addStats(HitDto hitDto) {
+        Hit hit = StatsMapper.toHit(hitDto);
         hit.setTime(LocalDateTime.now());
         statsRepository.save(hit);
     }
