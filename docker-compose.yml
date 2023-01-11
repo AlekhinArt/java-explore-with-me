@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.1'
 services:
   stats-server:
     ports:
@@ -55,5 +55,5 @@ services:
       - ewm-service
       - stats-server
     environment:
-      - MAIN_SERVICE_SERVER_URL=http://server:7070
-      - STAT_SERVICE_SERVER_URL=http://server:9090
+      - MAIN_SERVICE_SERVER_URL=http://172.17.0.1:7070
+      - STAT_SERVICE_SERVER_URL=http://172.17.0.1:9090

@@ -68,17 +68,17 @@ public class BaseClient {
     private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, @Nullable Map<String, Object> parameters, @Nullable T body) {
         HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders());
 
-        ResponseEntity<Object> statsResponse;
+        ResponseEntity<Object> gatewayResponse;
         try {
             if (parameters != null) {
-                statsResponse = rest.exchange(path, method, requestEntity, Object.class, parameters);
+                gatewayResponse = rest.exchange(path, method, requestEntity, Object.class, parameters);
             } else {
-                statsResponse = rest.exchange(path, method, requestEntity, Object.class);
+                gatewayResponse = rest.exchange(path, method, requestEntity, Object.class);
             }
         } catch (HttpStatusCodeException e) {
             return ResponseEntity.status(e.getStatusCode()).body(e.getResponseBodyAsByteArray());
         }
-        return prepareGatewayResponse(statsResponse);
+        return prepareGatewayResponse(gatewayResponse);
     }
 
     private HttpHeaders defaultHeaders() {
