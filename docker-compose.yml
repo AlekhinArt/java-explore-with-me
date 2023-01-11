@@ -31,7 +31,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/ewm_main
       - POSTGRES_USER=ewm_main
       - POSTGRES_PASSWORD=ewm_main
-      - GATEWAY_SERVER_URL=http://server:8080
+      - GATEWAY_SERVER_URL=http://localhost:8080
     depends_on:
       - ewm-db
   ewm-db:
