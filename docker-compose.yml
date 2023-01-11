@@ -2,7 +2,7 @@ version: '3.1'
 services:
   stats-server:
     ports:
-      - "90:9090"
+      - "9090:9090"
     build: ./ewm-stats-service/
     container_name: ewm_stats
     environment:
@@ -24,7 +24,7 @@ services:
       - POSTGRES_PASSWORD=stats
   ewm-service:
     ports:
-      - "70:7070"
+      - "7070:7070"
     build: ./ewm-main-service/
     container_name: ewm_main
     environment:
@@ -50,7 +50,7 @@ services:
     build: ./gateway/
     container_name: gateway_ewm
     ports:
-      - "80:8080"
+      - "8080:8080"
     depends_on:
       - ewm-service
       - stats-server
