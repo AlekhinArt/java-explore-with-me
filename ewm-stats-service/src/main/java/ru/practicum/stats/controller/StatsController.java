@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.stats.dto.HitDto;
 import ru.practicum.stats.dto.StatsDto;
-import ru.practicum.stats.model.Hit;
 import ru.practicum.stats.service.StatsService;
 
 import java.util.Collection;

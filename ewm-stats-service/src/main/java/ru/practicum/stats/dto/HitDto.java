@@ -2,7 +2,6 @@ package ru.practicum.stats.dto;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Builder
 @Getter
