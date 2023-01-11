@@ -195,14 +195,15 @@ public class EventServiceImpl implements EventService {
 
             events = eventRepository.getEventsOnlyAvailable(text, text, categoryRepository.findAllByIdIn(categories),
                     paid, rangeEndTime, rangeStartTime, pageable);
-            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
-
+//            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
+            events.stream().forEach(event -> event.setViews(1));
 
         } else {
 
             events = eventRepository.findByAnnotationLikeIgnoreCaseOrDescriptionLikeIgnoreCaseAndCategoryInAndEventDateBetweenAndPaid(text, text, categoryRepository.findAllByIdIn(categories),
                     rangeEndTime, rangeStartTime, paid, pageable);
-            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
+            events.stream().forEach(event -> event.setViews(1));
+//            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
         }
         return events.stream().map(EventMapper::toEventShortDto)
                 .collect(Collectors.toList());
