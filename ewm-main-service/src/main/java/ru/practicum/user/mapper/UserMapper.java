@@ -15,6 +15,7 @@ public class UserMapper {
                 user.getEmail()
         );
     }
+
     public static User toUser(UserDto userDto) {
         if (userDto == null) {
             return null;

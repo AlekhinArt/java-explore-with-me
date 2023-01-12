@@ -70,12 +70,11 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "or upper(e.description) like upper(:description) " +
             "and e.category in :categories and e.eventDate " +
             "between :eventDateStart and :eventDateEnd and e.paid = :paid")
-    Page<Event> findByAnnotationLikeIgnoreCaseOrDescriptionLikeIgnoreCaseAndCategoryInAndEventDateBetweenAndPaid
-            (@Param("annotation") String annotation,
-             @Param("description") String description,
-             @Param("categories") Collection<Category> categories,
-             @Param("eventDateStart") LocalDateTime eventDateStart,
-             @Param("eventDateEnd") LocalDateTime eventDateEnd,
-             @Param("paid") boolean paid, Pageable pageable);
+    Page<Event> findByAnnotationLikeIgnoreCaseOrDescriptionLikeIgnoreCaseAndCategoryInAndEventDateBetweenAndPaid(@Param("annotation") String annotation,
+                                                                                                                 @Param("description") String description,
+                                                                                                                 @Param("categories") Collection<Category> categories,
+                                                                                                                 @Param("eventDateStart") LocalDateTime eventDateStart,
+                                                                                                                 @Param("eventDateEnd") LocalDateTime eventDateEnd,
+                                                                                                                 @Param("paid") boolean paid, Pageable pageable);
 
 }
