@@ -66,7 +66,16 @@ public interface EventRepository extends JpaRepository<Event, Long> {
                           Pageable pageable);
 
     @Query("select e from Event e " +
-            "where upper(e.annotation) like upper(:annotation) or upper(e.description) like upper(:description) and e.category in :categories and e.eventDate between :eventDateStart and :eventDateEnd and e.paid = :paid")
-    Page<Event> findByAnnotationLikeIgnoreCaseOrDescriptionLikeIgnoreCaseAndCategoryInAndEventDateBetweenAndPaid(@Param("annotation") String annotation, @Param("description") String description, @Param("categories") Collection<Category> categories, @Param("eventDateStart") LocalDateTime eventDateStart, @Param("eventDateEnd") LocalDateTime eventDateEnd, @Param("paid") boolean paid, Pageable pageable);
+            "where upper(e.annotation) like upper(:annotation) " +
+            "or upper(e.description) like upper(:description) " +
+            "and e.category in :categories and e.eventDate " +
+            "between :eventDateStart and :eventDateEnd and e.paid = :paid")
+    Page<Event> findByAnnotationLikeIgnoreCaseOrDescriptionLikeIgnoreCaseAndCategoryInAndEventDateBetweenAndPaid
+            (@Param("annotation") String annotation,
+             @Param("description") String description,
+             @Param("categories") Collection<Category> categories,
+             @Param("eventDateStart") LocalDateTime eventDateStart,
+             @Param("eventDateEnd") LocalDateTime eventDateEnd,
+             @Param("paid") boolean paid, Pageable pageable);
 
 }

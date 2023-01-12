@@ -24,10 +24,6 @@ public class BaseClient {
     }
 
     protected ResponseEntity<Object> delete(String path) {
-        return delete(path, null);
-    }
-
-    protected ResponseEntity<Object> delete(String path, @Nullable Map<String, Object> parameters) {
         return makeAndSendRequest(HttpMethod.DELETE, path, null, null);
     }
 
@@ -65,7 +61,8 @@ public class BaseClient {
     }
 
 
-    private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, @Nullable Map<String, Object> parameters, @Nullable T body) {
+    private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path,
+                                                          @Nullable Map<String, Object> parameters, @Nullable T body) {
         HttpEntity<T> requestEntity = new HttpEntity<>(body, defaultHeaders());
 
         ResponseEntity<Object> gatewayResponse;

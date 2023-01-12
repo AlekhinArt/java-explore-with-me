@@ -27,9 +27,9 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteUser(@PositiveOrZero @PathVariable long id) {
+    public ResponseEntity<Object> deleteUser(@PositiveOrZero @PathVariable long id) {
         log.info("deleteUser userId: {}", id);
-        userClient.deleteUser(id);
+       return userClient.deleteUser(id);
     }
 
     @GetMapping

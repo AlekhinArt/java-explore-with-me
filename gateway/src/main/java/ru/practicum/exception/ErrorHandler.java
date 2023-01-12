@@ -54,7 +54,7 @@ public class ErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public GatewayError notValidException(final ConstraintViolationException e) {
-        log.debug("ValidationException {}", e.getMessage());
+        log.debug("ConstraintViolationException {}", e.getMessage());
         return GatewayError.builder()
                 .message(e.getMessage())
                 .status("FORBIDDEN")
@@ -66,10 +66,10 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public GatewayError notValidException(final MethodArgumentNotValidException e) {
-        log.debug("ValidationException {}", e.getMessage());
+    public GatewayError notValidMethodException(final MethodArgumentNotValidException e) {
+        log.debug("MethodArgumentNotValidException {}", e.getMessage());
         return GatewayError.builder()
-                .message(e.getMessage())
+                .message("MethodArgumentNotValidException")
                 .status("FORBIDDEN")
                 .reason("For the requested operation the conditions are not met.")
                 .timestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME))

@@ -28,22 +28,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(User user) {
+    public UserDto createUser(UserDto userDto) {
         User newUser;
         try {
-            newUser = userRepository.save(user);
+            newUser = userRepository.save(UserMapper.toUser(userDto));
         } catch (Exception e) {
-            throw new AnybodyUseEmailOrNameException(" имя или email");
+            throw new AnybodyUseEmailOrNameException(" Name or email are used");
         }
-        log.info("createUser user: {}", user);
+        log.info("createUser user: {}", newUser);
         return UserMapper.toUserDto(newUser);
     }
 
     @Override
-    public void deleteUser(long id) {
+    public UserDto deleteUser(long id) {
+        User newUser = getById(id);
         try {
             log.info("deleteUser id: {}", id);
             userRepository.deleteById(id);
+            return UserMapper.toUserDto(newUser);
         } catch (Exception e) {
             log.debug("deleteUser.NotFoundException(Пользователь не найден)");
             throw new NotFoundException("Пользователь не найден");
@@ -54,10 +56,15 @@ public class UserServiceImpl implements UserService {
     public Collection<UserDto> getAllUsers(Set<Long> ids, Integer from, Integer size) {
         log.info("Get all users with param ids: {}, from: {}, size: {};", ids, from, size);
         Pageable pageable = PageRequest.of(from / size, size);
-        return userRepository.findAllByIdIn(ids, pageable).stream()
-                .map(UserMapper::toUserDto)
-                .collect(Collectors.toList());
-
+        if (ids.isEmpty()) {
+            return userRepository.findAll(pageable).stream()
+                    .map(UserMapper::toUserDto)
+                    .collect(Collectors.toList());
+        } else {
+            return userRepository.findAllByIdIn(ids, pageable).stream()
+                    .map(UserMapper::toUserDto)
+                    .collect(Collectors.toList());
+        }
     }
 
     @Override

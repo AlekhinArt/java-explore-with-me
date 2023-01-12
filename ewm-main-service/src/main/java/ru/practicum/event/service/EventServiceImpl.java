@@ -25,6 +25,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class EventServiceImpl implements EventService {
                                                  Integer from,
                                                  Integer size) {
         Pageable pageable = PageRequest.of(from / size, size);
-        List<Category> categories = categoryRepository.findAllByIdIn(categoriesIds).stream().collect(Collectors.toList());
+        List<Category> categories = new ArrayList<>(categoryRepository.findAllByIdIn(categoriesIds));
         List<User> users = userRepository.findAllByIdIn(usersIds);
         LocalDateTime start = LocalDateTime.parse(rangeStart, formatter);
         LocalDateTime end = LocalDateTime.parse(rangeEnd, formatter);
@@ -63,7 +64,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventFullDto updateEvent(Long eventId, AdminUpdateEventRequest eventDto) {
         Event event = getEventById(eventId);
-
         event.setPaid(eventDto.isPaid());
         event.setRequestModeration(event.isRequestModeration());
         if (eventDto.getEventDate() != null) {
@@ -195,15 +195,13 @@ public class EventServiceImpl implements EventService {
 
             events = eventRepository.getEventsOnlyAvailable(text, text, categoryRepository.findAllByIdIn(categories),
                     paid, rangeEndTime, rangeStartTime, pageable);
-//            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
-            events.stream().forEach(event -> event.setViews(1));
+            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
 
         } else {
 
             events = eventRepository.findByAnnotationLikeIgnoreCaseOrDescriptionLikeIgnoreCaseAndCategoryInAndEventDateBetweenAndPaid(text, text, categoryRepository.findAllByIdIn(categories),
                     rangeEndTime, rangeStartTime, paid, pageable);
-            events.stream().forEach(event -> event.setViews(1));
-//            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
+            events.stream().forEach(event -> event.setViews(getViews(event.getId())));
         }
         return events.stream().map(EventMapper::toEventShortDto)
                 .collect(Collectors.toList());

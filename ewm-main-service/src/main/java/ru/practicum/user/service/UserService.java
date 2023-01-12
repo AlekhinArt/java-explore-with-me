@@ -7,9 +7,9 @@ import java.util.Collection;
 import java.util.Set;
 
 public interface UserService {
-    UserDto createUser(User user);
+    UserDto createUser(UserDto userDto);
 
-    void deleteUser(long id);
+    UserDto deleteUser(long id);
 
     Collection<UserDto> getAllUsers(Set<Long> ids, Integer from, Integer size);
 
