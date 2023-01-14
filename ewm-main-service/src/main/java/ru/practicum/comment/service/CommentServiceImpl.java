@@ -92,18 +92,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Collection<ShowCommentDto> getComments(Long eventId, Integer from, Integer size) {
-        Pageable pageable = PageRequest.of(from / size, size);
         Event event = eventService.getEventById(eventId);
-        return commentRepository.getComments(event.getId(), pageable).stream()
+        return commentRepository.getComments(event.getId(), PageRequest.of(from / size, size)).stream()
                 .map(CommentMapper::toShowCommentDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Collection<ShowCommentDto> getCommentsOneUser(Long userId, Integer from, Integer size) {
-        Pageable pageable = PageRequest.of(from / size, size);
         userService.getById(userId);
-        return commentRepository.findByAuthor_Id(userId, pageable).stream()
+        return commentRepository.findByAuthor_Id(userId, PageRequest.of(from / size, size)).stream()
                 .map(CommentMapper::toShowCommentDto)
                 .collect(Collectors.toList());
 
