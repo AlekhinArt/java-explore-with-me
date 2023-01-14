@@ -212,6 +212,7 @@ public class EventServiceImpl implements EventService {
     public EventFullDto getEvent(Long eventId) {
         return EventMapper.toEventFullDto(getEventById(eventId));
     }
+
     @Override
     public Event getEventById(Long eventId) {
         return eventRepository.findById(eventId)
