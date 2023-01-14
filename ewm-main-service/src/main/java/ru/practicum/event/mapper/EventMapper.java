@@ -37,6 +37,7 @@ public class EventMapper {
                 .state(event.getState().toString())
                 .title(event.getTitle())
                 .views(event.getViews())
+                .comment(event.isComment())
                 .build();
     }
 

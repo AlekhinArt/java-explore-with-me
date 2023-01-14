@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.practicum.exceptions.AnybodyUseEmailOrNameException;
+import ru.practicum.exceptions.DataConflictException;
 import ru.practicum.exceptions.NotFoundException;
 import ru.practicum.user.dto.UserDto;
 import ru.practicum.user.mapper.UserMapper;
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         try {
             newUser = userRepository.save(UserMapper.toUser(userDto));
         } catch (Exception e) {
-            throw new AnybodyUseEmailOrNameException(" Name or email are used");
+            throw new DataConflictException(" Name or email are used");
         }
         log.info("createUser user: {}", newUser);
         return UserMapper.toUserDto(newUser);
