@@ -1,4 +1,4 @@
-﻿package ru.practicum.comment.service;
+package ru.practicum.comment.service;
 
 import ru.practicum.comment.dto.CommentDto;
 import ru.practicum.comment.dto.ShowCommentDto;

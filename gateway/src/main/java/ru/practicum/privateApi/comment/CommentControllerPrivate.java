@@ -1,4 +1,4 @@
-﻿package ru.practicum.privateApi.comment;
+package ru.practicum.privateApi.comment;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-﻿package ru.practicum.comment.service;
+package ru.practicum.comment.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

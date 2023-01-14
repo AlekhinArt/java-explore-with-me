@@ -1,4 +1,4 @@
-﻿package ru.practicum.adminApi.comment;
+package ru.practicum.adminApi.comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

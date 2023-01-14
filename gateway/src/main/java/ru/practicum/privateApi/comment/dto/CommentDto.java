@@ -1,4 +1,4 @@
-﻿package ru.practicum.privateApi.comment.dto;
+package ru.practicum.privateApi.comment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

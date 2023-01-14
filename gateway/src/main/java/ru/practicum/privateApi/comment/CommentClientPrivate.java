@@ -1,4 +1,4 @@
-﻿package ru.practicum.privateApi.comment;
+package ru.practicum.privateApi.comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
