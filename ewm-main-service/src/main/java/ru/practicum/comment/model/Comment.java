@@ -26,6 +26,6 @@ public class Comment {
     @JoinColumn(name = "author")
     private User author;
     private String message;
-    private LocalDateTime creatTime;
+    private LocalDateTime createTime;
 
 }

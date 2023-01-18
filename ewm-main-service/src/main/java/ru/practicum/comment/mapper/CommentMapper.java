@@ -13,7 +13,7 @@ public class CommentMapper {
         return ShowCommentDto.builder()
                 .message(comment.getMessage())
                 .authorName(comment.getAuthor().getName())
-                .creatTime(comment.getCreatTime().format(formatter))
+                .creatTime(comment.getCreateTime().format(formatter))
                 .build();
     }
 }

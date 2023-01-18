@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    @Query("select c from Comment c where upper(c.event.id) = upper(:id) order by c.creatTime DESC ")
+    @Query("select c from Comment c where upper(c.event.id) = upper(:id) order by c.createTime DESC ")
     Collection<Comment> getComments(@Param("id") Long id, Pageable pageable);
 
     @Query("select c from Comment c where c.author.id = :id")

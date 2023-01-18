@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS events (
                         paid boolean,
                         participant_limit int,
                         published_on timestamp,
-                        request_moderation boolean,
+                        request_moderation boolean NOT NULL,
                         state varchar(255),
                         title varchar,
     comment boolean,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS comments (
                                         event BIGINT references  events (event_id),
                                         author BIGINT references  users (user_id),
                                         message varchar NOT NULL,
-                                        creatTime timestamp,
+                                        createTime timestamp NOT NULL,
                                         CONSTRAINT pk_comment PRIMARY KEY (comment_id)
 );
 
