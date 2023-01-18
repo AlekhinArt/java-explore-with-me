@@ -12,5 +12,5 @@ import lombok.Setter;
 public class ShowCommentDto {
     private String authorName;
     private String message;
-    private String creatTime;
+    private String createTime;
 }

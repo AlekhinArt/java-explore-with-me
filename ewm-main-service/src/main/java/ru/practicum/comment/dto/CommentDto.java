@@ -12,5 +12,5 @@ public class CommentDto {
     private Long event;
     private Long author;
     private String message;
-    private String creatTime;
+    private String createTime;
 }

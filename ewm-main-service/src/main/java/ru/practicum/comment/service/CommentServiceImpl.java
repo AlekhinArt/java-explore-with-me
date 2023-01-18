@@ -42,7 +42,7 @@ public class CommentServiceImpl implements CommentService {
         return CommentMapper.toShowCommentDto(commentRepository.save(Comment.builder()
                 .event(event)
                 .author(user)
-                .creatTime(LocalDateTime.now())
+                .createTime(LocalDateTime.now())
                 .message(commentDto.getMessage())
                 .build()));
     }
