@@ -3,3 +3,5 @@ Template repository for ExploreWithMe project.
 
 
 Ссылка на пул реквест https://github.com/Artem024/java-explore-with-me/pull/3
+
+Надо что-то поправить, что гит хоть что-то одобрил)

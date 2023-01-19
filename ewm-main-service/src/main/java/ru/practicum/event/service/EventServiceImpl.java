@@ -153,6 +153,7 @@ public class EventServiceImpl implements EventService {
         event.setCategory(category);
         event.setCreatedOn(LocalDateTime.now());
         event.setState(State.PENDING);
+        event.setComment(true);
         return EventMapper.toEventFullDto(eventRepository.save(event));
     }
 
@@ -212,7 +213,8 @@ public class EventServiceImpl implements EventService {
         return EventMapper.toEventFullDto(getEventById(eventId));
     }
 
-    private Event getEventById(Long eventId) {
+    @Override
+    public Event getEventById(Long eventId) {
         return eventRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Event with id: " + eventId + "not found."));
     }

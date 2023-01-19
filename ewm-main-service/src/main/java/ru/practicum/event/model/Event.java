@@ -50,5 +50,6 @@ public class Event {
     private String title;
     @Transient
     private long views;
+    private boolean comment;
 
 }

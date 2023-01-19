@@ -40,7 +40,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
-    public MainServiceError anybodyUseEmailOrNameException(final AnybodyUseEmailOrNameException e) {
+    public MainServiceError dataConflict(final DataConflictException e) {
         log.info("AnybodyUseEmailOrNameException {}", e.getMessage());
         return MainServiceError.builder()
                 .message("AnybodyUseEmailOrNameException" + e.getMessage())

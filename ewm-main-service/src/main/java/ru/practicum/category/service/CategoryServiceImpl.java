@@ -9,7 +9,7 @@ import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.mapper.CategoryMapper;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.repository.CategoryRepository;
-import ru.practicum.exceptions.AnybodyUseEmailOrNameException;
+import ru.practicum.exceptions.DataConflictException;
 import ru.practicum.exceptions.NotFoundException;
 
 import java.util.Collection;
@@ -58,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             newCategory = categoryRepository.save(category);
         } catch (Exception e) {
-            throw new AnybodyUseEmailOrNameException("Category name: " + category.getName() + " is already exist ");
+            throw new DataConflictException("Category name: " + category.getName() + " is already exist ");
         }
         return CategoryMapper.toCategoryDto(newCategory);
     }
@@ -69,7 +69,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             changeCategory = categoryRepository.save(category);
         } catch (Exception e) {
-            throw new AnybodyUseEmailOrNameException("Category name: " + category.getName() + " is already exist ");
+            throw new DataConflictException("Category name: " + category.getName() + " is already exist ");
         }
         return CategoryMapper.toCategoryDto(changeCategory);
 

@@ -1,6 +1,7 @@
 package ru.practicum.event.service;
 
 import ru.practicum.event.dto.*;
+import ru.practicum.event.model.Event;
 import ru.practicum.event.model.State;
 
 import java.util.Collection;
@@ -30,4 +31,5 @@ public interface EventService {
 
     EventFullDto getEvent(Long eventId);
 
+    Event getEventById(Long eventId);
 }
